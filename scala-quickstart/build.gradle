@@ -1,0 +1,14 @@
+dependencies {
+    implementation project(path: ':core-api', configuration: 'default')
+
+}
+
+task runExample(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'com.optimizely.ExampleApp'
+    standardInput = System.in
+
+    if (project.hasProperty('args')) {
+        args project.args.split(' ')
+    }
+}

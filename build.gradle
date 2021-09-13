@@ -1,0 +1,51 @@
+buildscript {
+    apply from: 'gradle/utils.gradle'
+    apply from: 'versions.gradle'
+
+    repositories {
+        mavenCentral()
+        maven { url = 'https://plugins.gradle.org/m2/' }
+    }
+
+    dependencies {
+    }
+}
+
+allprojects {
+    apply plugin: 'idea'
+
+    with projectPropertiesSupport
+
+    task copyDistributed(type: Copy) {
+        from 'distributed'
+        into "$buildDir/distributed"
+    }
+}
+
+subprojects {
+    with supportScript('scala')
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+
+    tasks.withType(Tar) {
+        compression = 'GZIP'
+    }
+
+    tasks.withType(Test) {
+        maxHeapSize = '2g'
+
+        testLogging {
+            exceptionFormat 'full'
+        }
+    }
+
+
+
+}
+
+wrapper {
+    gradleVersion = '5.2.1'
+}

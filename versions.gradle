@@ -1,0 +1,22 @@
+/**
+ * Dependency versions
+ */
+ext {
+    // Default Scala version
+    if (!project.hasProperty('scalaVersion')) {
+        scalaVersion = '2.11'
+    }
+    scalaVariant = (scalaVersion =~ /^(\d+\.\d+)/)[0][1]
+
+    // Dependencies
+
+    clientSchemaVersion = '1.0.13'
+    httpClientVersion = '4.5.3'
+    jacksonVersion = '2.9.8'
+    jodaConvertVersion = '1.2'
+    jodaTimeVersion = '2.9.4'
+    json4sVersion = '3.5.4'
+    jsoupVersion = '1.12.1'
+    scalaArmVersion = '1.4'
+
+}

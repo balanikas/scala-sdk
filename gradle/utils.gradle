@@ -1,0 +1,39 @@
+/**
+ * Utils
+ */
+ext {
+    projectPropertiesSupport = {
+        loadProjectProperties(project)
+    }
+
+    supportScript = { String name ->
+        return {
+            applyScript(project, name)
+        }
+    }
+}
+
+static def loadProjectProperties(Project project) {
+    File file = project.file('project.properties')
+    if (file.exists()) {
+        Properties props = new Properties()
+        file.withInputStream { props.load(it) }
+        props.each { key, value ->
+            if (project.hasProperty(key)) {
+                project.setProperty(key, value)
+            } else {
+                project.ext[key] = value
+            }
+        }
+    }
+}
+
+static def applyScript(Project project, String name) {
+    if (!name.endsWith('.gradle')) {
+        name = "${name}.gradle"
+    }
+
+    project.with {
+        apply from: "$rootDir/gradle/$name"
+    }
+}

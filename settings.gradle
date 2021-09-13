@@ -1,0 +1,6 @@
+include 'core-api'
+include 'scala-quickstart'
+
+rootProject.children.each { project ->
+    project.projectDir = new File("$project.name")
+}

@@ -1,0 +1,34 @@
+/**
+ * Scala support
+ */
+if (!project.hasProperty('isLibrary')) {
+    ext.isLibrary = false
+}
+
+apply plugin: 'scala'
+//apply plugin: "com.github.alisiikh.scalastyle_$scalaVariant"
+if (isLibrary) {
+    apply plugin: 'java-library'
+}
+
+archivesBaseName = "${name}_$scalaVariant"
+
+dependencies {
+    if (isLibrary) {
+        api "org.scala-lang:scala-library:$scalaVersion"
+    } else {
+        implementation "org.scala-lang:scala-library:$scalaVersion"
+    }
+}
+
+//scalaStyle {
+//    config = file("$rootDir/config/scalastyle.xml")
+//    failOnWarning = false
+//}
+
+//check.dependsOn scalaStyleCheck
+
+tasks.withType(ScalaCompile) {
+    // Emit warning and location for usages of features that should be imported explicitly.
+    scalaCompileOptions.additionalParameters = ['-feature']
+}

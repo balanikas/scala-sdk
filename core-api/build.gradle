@@ -1,0 +1,6 @@
+
+dependencies {
+    implementation "org.json4s:json4s-ext_$scalaVariant:$json4sVersion"
+    implementation "org.json4s:json4s-native_$scalaVariant:$json4sVersion"
+    //implementation "org.json4s:json4s-ext_$scalaVariant:$json4sVersion"
+}
