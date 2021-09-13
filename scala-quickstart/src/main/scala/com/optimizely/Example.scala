@@ -73,7 +73,7 @@ object ExampleApp extends App {
   val break = 0
 
   private def processVisitor(userId: String, attributes: Map[String,AnyRef]) = {
-    val projectConfigManager = new ProjectConfigManager("BX9Y3bTa4YErpHZEMpAwHm")
+    val projectConfigManager = new ProjectConfigManager("*********")
     val decisionService = new DecisionService(new Bucketer)
     val eventProcessor = new ForwardingEventProcessor(new NoopEventHandler)
     val optimizely = new Optimizely(projectConfigManager, decisionService, eventProcessor)
